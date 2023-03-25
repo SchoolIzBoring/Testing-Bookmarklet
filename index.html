@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmarklet Animation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="round-square" onclick="startAnimation()"></div>
+    <div class="gui" id="myGui">
+        <div class="gui-header" onmousedown="startDrag(event)">
+          <div class="gui-text">Bookmarklets</div>
+          <div class="gui-buttons">
+            <img id="uncollapse-img" src="downarrow.png" onclick="startAnimation2()" style="display: none;">
+            <img id="collapse-img" src="minus.png" onclick="startAnimation2()" style="display: inline;">
+          </div>
+        </div>
+        <div class="gui-content">
+          <div class="page" id="page1">
+            <button class="gui-button" onclick="runCode1(this)">Button 1</button>
+            <button class="gui-button" onclick="runCode2(this)">Button 2</button>
+            <button class="gui-button" onclick="runCode3(this)">Button 3</button>
+            <button class="gui-button" onclick="runCode4(this)">Button 4</button>
+            <button class="gui-button" onclick="runCode5(this)">Button 5</button>
+            <button class="gui-button" onclick="runCode6(this)">Button 6</button>
+          </div>
+          <div class="page" id="page2" style="display: none;">
+            <button class="gui-button" onclick="runCode7(this)">Button 7</button>
+            <button class="gui-button" onclick="runCode8(this)">Button 8</button>
+            <button class="gui-button" onclick="runCode9(this)">Button 9</button>
+            <button class="gui-button" onclick="runCode10(this)">Button 10</button>
+            <button class="gui-button" onclick="runCode11(this)">Button 11</button>
+            <button class="gui-button" onclick="runCode12(this)">Button 12</button>
+          </div>
+        </div>
+        <div class="pagination">
+            <img id="prev-page-img" src="leftarrow.png" onclick="prevPage()">
+            <span id="page-num">1</span>
+            <img id="next-page-img" src="rightarrow.png" onclick="nextPage()">
+          </div>
+      </div>      
+    </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+  <script>
+    var gui = document.getElementById("myGui");
+    var dragX, dragY;
+
+    function startDrag(event) {
+      dragX = event.clientX - gui.offsetLeft;
+      dragY = event.clientY - gui.offsetTop;
+      document.addEventListener("mousemove", doDrag);
+      document.addEventListener("mouseup", stopDrag);
+    }
+
+    function doDrag(event) {
+      gui.style.left = event.clientX - dragX + "px";
+      gui.style.top = event.clientY - dragY + "px";
+    }
+
+    function stopDrag() {
+      document.removeEventListener("mousemove", doDrag);
+      document.removeEventListener("mouseup", stopDrag);
+    }
+  </script>
+</html>
